@@ -9,12 +9,18 @@ public class Collisions : MonoBehaviour {
 
     public int life = 100;
     public GameObject explosion;
+    public AudioClip audio;
+    private AudioSource source;
     bool pause = false;
     bool resumed = false;
     
 	void Start () {
 
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>() ;
+        source = gameObject.AddComponent<AudioSource>();
+        source.playOnAwake = false;
+
+        source.clip = audio;
 	}
 	
 	void Update () {
@@ -47,6 +53,7 @@ public class Collisions : MonoBehaviour {
         if (col.gameObject.CompareTag("enemy") || col.gameObject.CompareTag("ground"))
         {
             Instantiate(explosion, transform.position, Quaternion.identity);
+            source.Play();
             Destroy(gameObject);
         }
 
