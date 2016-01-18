@@ -1,0 +1,289 @@
+fileFormatVersion: 2
+guid: 3bf697f92f900d940996367cb5f636c2
+timeCreated: 1453097185
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: BigEngine004
+    100002: BigEngine004 1
+    100004: BigEngine1
+    100006: BigEngine1 1
+    100008: BigEngine3
+    100010: BigEngine3 1
+    100012: Bridge
+    100014: Cylinder001
+    100016: Cylinder001 1
+    100018: Cylinder029
+    100020: Cylinder030
+    100022: Cylinder031
+    100024: Cylinder031 1
+    100026: Cylinder032
+    100028: Cylinder032 1
+    100030: Cylinder033
+    100032: Cylinder033 1
+    100034: Cylinder034
+    100036: Cylinder034 1
+    100038: Cylinder035
+    100040: Cylinder035 1
+    100042: Cylinder036
+    100044: Cylinder036 1
+    100046: Deck001
+    100048: EngineSupport
+    100050: EngineSupport 1
+    100052: EngineSupport1
+    100054: EngineSupport1 1
+    100056: EngineSupportDownR
+    100058: EngineSupportDownR 1
+    100060: Shield1
+    100062: Shield2
+    100064: SmallEngine1
+    100066: SmallEngine1 1
+    100068: SmallEngine14
+    100070: SmallEngine14 1
+    100072: SmallEngine2
+    100074: SmallEngine2 1
+    100076: SmallEngine3
+    100078: SmallEngine3 1
+    100080: SmallRightBox
+    100082: //RootNode
+    100084: UpperDeck
+    100086: ventral_hangar
+    400000: BigEngine004
+    400002: BigEngine004 1
+    400004: BigEngine1
+    400006: BigEngine1 1
+    400008: BigEngine3
+    400010: BigEngine3 1
+    400012: Bridge
+    400014: Cylinder001
+    400016: Cylinder001 1
+    400018: Cylinder029
+    400020: Cylinder030
+    400022: Cylinder031
+    400024: Cylinder031 1
+    400026: Cylinder032
+    400028: Cylinder032 1
+    400030: Cylinder033
+    400032: Cylinder033 1
+    400034: Cylinder034
+    400036: Cylinder034 1
+    400038: Cylinder035
+    400040: Cylinder035 1
+    400042: Cylinder036
+    400044: Cylinder036 1
+    400046: Deck001
+    400048: EngineSupport
+    400050: EngineSupport 1
+    400052: EngineSupport1
+    400054: EngineSupport1 1
+    400056: EngineSupportDownR
+    400058: EngineSupportDownR 1
+    400060: Shield1
+    400062: Shield2
+    400064: SmallEngine1
+    400066: SmallEngine1 1
+    400068: SmallEngine14
+    400070: SmallEngine14 1
+    400072: SmallEngine2
+    400074: SmallEngine2 1
+    400076: SmallEngine3
+    400078: SmallEngine3 1
+    400080: SmallRightBox
+    400082: //RootNode
+    400084: UpperDeck
+    400086: ventral_hangar
+    2300000: BigEngine004
+    2300002: BigEngine004 1
+    2300004: BigEngine1
+    2300006: BigEngine1 1
+    2300008: BigEngine3
+    2300010: BigEngine3 1
+    2300012: Bridge
+    2300014: Cylinder001
+    2300016: Cylinder001 1
+    2300018: Cylinder029
+    2300020: Cylinder030
+    2300022: Cylinder031
+    2300024: Cylinder031 1
+    2300026: Cylinder032
+    2300028: Cylinder032 1
+    2300030: Cylinder033
+    2300032: Cylinder033 1
+    2300034: Cylinder034
+    2300036: Cylinder034 1
+    2300038: Cylinder035
+    2300040: Cylinder035 1
+    2300042: Cylinder036
+    2300044: Cylinder036 1
+    2300046: Deck001
+    2300048: EngineSupport
+    2300050: EngineSupport 1
+    2300052: EngineSupport1
+    2300054: EngineSupport1 1
+    2300056: EngineSupportDownR
+    2300058: EngineSupportDownR 1
+    2300060: Shield1
+    2300062: Shield2
+    2300064: SmallEngine1
+    2300066: SmallEngine1 1
+    2300068: SmallEngine14
+    2300070: SmallEngine14 1
+    2300072: SmallEngine2
+    2300074: SmallEngine2 1
+    2300076: SmallEngine3
+    2300078: SmallEngine3 1
+    2300080: SmallRightBox
+    2300082: UpperDeck
+    2300084: ventral_hangar
+    3300000: BigEngine004
+    3300002: BigEngine004 1
+    3300004: BigEngine1
+    3300006: BigEngine1 1
+    3300008: BigEngine3
+    3300010: BigEngine3 1
+    3300012: Bridge
+    3300014: Cylinder001
+    3300016: Cylinder001 1
+    3300018: Cylinder029
+    3300020: Cylinder030
+    3300022: Cylinder031
+    3300024: Cylinder031 1
+    3300026: Cylinder032
+    3300028: Cylinder032 1
+    3300030: Cylinder033
+    3300032: Cylinder033 1
+    3300034: Cylinder034
+    3300036: Cylinder034 1
+    3300038: Cylinder035
+    3300040: Cylinder035 1
+    3300042: Cylinder036
+    3300044: Cylinder036 1
+    3300046: Deck001
+    3300048: EngineSupport
+    3300050: EngineSupport 1
+    3300052: EngineSupport1
+    3300054: EngineSupport1 1
+    3300056: EngineSupportDownR
+    3300058: EngineSupportDownR 1
+    3300060: Shield1
+    3300062: Shield2
+    3300064: SmallEngine1
+    3300066: SmallEngine1 1
+    3300068: SmallEngine14
+    3300070: SmallEngine14 1
+    3300072: SmallEngine2
+    3300074: SmallEngine2 1
+    3300076: SmallEngine3
+    3300078: SmallEngine3 1
+    3300080: SmallRightBox
+    3300082: UpperDeck
+    3300084: ventral_hangar
+    4300000: BigEngine1
+    4300002: Cylinder001
+    4300004: BigEngine3
+    4300006: Cylinder036
+    4300008: Shield2
+    4300010: Cylinder030
+    4300012: SmallRightBox
+    4300014: Shield1
+    4300016: EngineSupportDownR
+    4300018: EngineSupport
+    4300020: EngineSupport1
+    4300022: SmallEngine2
+    4300024: Cylinder031
+    4300026: SmallEngine1
+    4300028: Cylinder033
+    4300030: SmallEngine14
+    4300032: Cylinder032
+    4300034: BigEngine1
+    4300036: Cylinder001
+    4300038: BigEngine004
+    4300040: Cylinder035
+    4300042: SmallEngine3
+    4300044: Cylinder034
+    4300046: SmallEngine2
+    4300048: Cylinder031
+    4300050: SmallEngine1
+    4300052: Cylinder033
+    4300054: SmallEngine14
+    4300056: Cylinder032
+    4300058: BigEngine3
+    4300060: Cylinder036
+    4300062: BigEngine004
+    4300064: Cylinder035
+    4300066: SmallEngine3
+    4300068: Cylinder034
+    4300070: ventral_hangar
+    4300072: EngineSupportDownR
+    4300074: EngineSupport
+    4300076: EngineSupport1
+    4300078: Bridge
+    4300080: Deck001
+    4300082: UpperDeck
+    4300084: Cylinder029
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
