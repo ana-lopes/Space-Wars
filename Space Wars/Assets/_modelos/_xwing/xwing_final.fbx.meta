@@ -1,0 +1,153 @@
+fileFormatVersion: 2
+guid: 1354c2e5ecd184e4c9e5ffaf702e8470
+timeCreated: 1453084041
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: cockpit top
+    100002: motor
+    100004: motor.001
+    100006: motor.002
+    100008: motor.003
+    100010: motor.004
+    100012: motor.005
+    100014: motor.006
+    100016: motor.007
+    100018: motor.008
+    100020: motor.009
+    100022: motor.010
+    100024: motor.011
+    100026: plane
+    100028: Plane.003
+    100030: r2-d2
+    100032: //RootNode
+    400000: cockpit top
+    400002: motor
+    400004: motor.001
+    400006: motor.002
+    400008: motor.003
+    400010: motor.004
+    400012: motor.005
+    400014: motor.006
+    400016: motor.007
+    400018: motor.008
+    400020: motor.009
+    400022: motor.010
+    400024: motor.011
+    400026: plane
+    400028: Plane.003
+    400030: r2-d2
+    400032: //RootNode
+    2300000: cockpit top
+    2300002: motor
+    2300004: motor.001
+    2300006: motor.002
+    2300008: motor.003
+    2300010: motor.004
+    2300012: motor.005
+    2300014: motor.006
+    2300016: motor.007
+    2300018: motor.008
+    2300020: motor.009
+    2300022: motor.010
+    2300024: motor.011
+    2300026: plane
+    2300028: Plane.003
+    2300030: r2-d2
+    3300000: cockpit top
+    3300002: motor
+    3300004: motor.001
+    3300006: motor.002
+    3300008: motor.003
+    3300010: motor.004
+    3300012: motor.005
+    3300014: motor.006
+    3300016: motor.007
+    3300018: motor.008
+    3300020: motor.009
+    3300022: motor.010
+    3300024: motor.011
+    3300026: plane
+    3300028: Plane.003
+    3300030: r2-d2
+    4300000: motor.011
+    4300002: motor.009
+    4300004: motor.008
+    4300006: motor.007
+    4300008: motor.006
+    4300010: motor.005
+    4300012: motor.003
+    4300014: motor.002
+    4300016: motor.001
+    4300018: motor.010
+    4300020: motor.004
+    4300022: r2-d2
+    4300024: motor
+    4300026: Plane.003
+    4300028: cockpit top
+    4300030: plane
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
