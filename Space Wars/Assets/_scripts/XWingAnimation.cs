@@ -94,4 +94,9 @@ public class XWingAnimation : MonoBehaviour {
         get { return animate; }
         set { animate = value; }
     }
+
+    public bool isInAttackMode
+    {
+        get { return open; }
+    }
 }

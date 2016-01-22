@@ -9,6 +9,8 @@ public class ShootAI : MonoBehaviour {
     public float fireRate = 1.0f;
     Light flash;
 
+    GameObject laserClone;
+
     void Awake()
     {
         shoot = GetComponent<AudioSource>();
@@ -23,7 +25,9 @@ public class ShootAI : MonoBehaviour {
 
         if (fireRate < nextFire)
         {
-            Instantiate(laser, transform.position, transform.rotation);
+            laserClone = (GameObject) Instantiate(laser, transform.position, transform.rotation);
+            laserClone.GetComponent<MoveBullet>().velocity = Vector3.forward * -80f;
+
             shoot.Play();
             nextFire = 0;
 
