@@ -51,6 +51,7 @@ public class PlayerControl : MonoBehaviour {
     {
         if (col.gameObject.CompareTag("enemy") || col.gameObject.CompareTag("ground"))
         {
+            Debug.Log("boop");
             //Instantiate(explosion, transform.position, Quaternion.identity);
             //source.Play();
             //Destroy(gameObject);
