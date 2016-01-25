@@ -45,27 +45,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Day Night Cycle\Scripts\DayNightController.cs" />
-     <Compile Include="Assets\Day Night Cycle\Scripts\DemoScripts\RoatateCamera.cs" />
-     <Compile Include="Assets\EnemyControl.cs" />
-     <Compile Include="Assets\Reset.cs" />
-     <Compile Include="Assets\_scripts\Collisions.cs" />
+     <Compile Include="Assets\_scripts\EnemyControl.cs" />
      <Compile Include="Assets\_scripts\InfiniteTerrain.cs" />
      <Compile Include="Assets\_scripts\MoveBullet.cs" />
+     <Compile Include="Assets\_scripts\PlayerControl.cs" />
+     <Compile Include="Assets\_scripts\Reset.cs" />
      <Compile Include="Assets\_scripts\Shoot.cs" />
      <Compile Include="Assets\_scripts\ShootAI.cs" />
      <Compile Include="Assets\_scripts\XWingAnimation.cs" />
-     <None Include="Assets\Day Night Cycle\ReadMe.txt" />
-     <None Include="Assets\Standard Assets\Vehicles\Car\Shaders\DiffuseReflectiveShader.shader" />
+     <Compile Include="Assets\_skybox\Day Night Cycle\Scripts\DayNightController.cs" />
+     <Compile Include="Assets\_skybox\Day Night Cycle\Scripts\DemoScripts\RoatateCamera.cs" />
+     <None Include="Assets\_skybox\Day Night Cycle\ReadMe.txt" />
      <None Include="Assets\Standard Assets\Vehicles\Aircraft\AircraftGuidelines.txt" />
-     <None Include="Assets\Standard Assets\Vehicles\Car\Shaders\ReflectiveDiffuseSpecTransp.shader" />
      <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
-     <None Include="Assets\Standard Assets\Vehicles\Car\Shaders\ReflectiveDiffuseSpec.shader" />
      <None Include="Assets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />
      <None Include="Assets\Standard Assets\Fonts\OpenSans\License!.txt" />
-     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAddSoft.shader" />
-     <None Include="Assets\Standard Assets\Vehicles\Car\CarGuidelines.txt" />
      <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAdd.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
