@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Assets\_scripts\EnemyControl.cs" />
     <Compile Include="Assets\_scripts\InfiniteTerrain.cs" />
+    <Compile Include="Assets\_scripts\MainMenu.cs" />
     <Compile Include="Assets\_scripts\MoveBullet.cs" />
     <Compile Include="Assets\_scripts\PlayerControl.cs" />
     <Compile Include="Assets\_scripts\Reset.cs" />
