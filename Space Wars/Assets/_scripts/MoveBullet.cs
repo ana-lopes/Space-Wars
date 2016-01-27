@@ -30,4 +30,12 @@ public class MoveBullet : MonoBehaviour {
         //    transform.position += transform.forward * Time.deltaTime * speed;
         //}
 	}
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.CompareTag("ground"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }
