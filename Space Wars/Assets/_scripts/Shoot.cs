@@ -8,15 +8,17 @@ public class Shoot : MonoBehaviour {
 
     [SerializeField] private float nextFire = 0;
     [SerializeField] private float fireRate = 0.5f;
+    [SerializeField] private Camera cam;
 
     private AudioSource shootSource;
     private Light flash;
     private GameObject laserClone;
 
     //Variáveis para mandar tiros para o centro do ecrã. x e y representam o centro do ecrã.
-    float x = Screen.width / 2f;
-    float y = Screen.height / 2f;
+    float x, y;
     Vector3 direction;
+
+    bool input;
 
     void Awake()
     {
@@ -24,23 +26,55 @@ public class Shoot : MonoBehaviour {
         flash = GetComponent<Light>();
         flash.intensity = 0;
     }
+
+    void Start()
+    {
+        if (cam == null)
+            cam = Camera.main;
+
+        //Calcular o center point para cada tipo de camara
+        switch(cam.name)
+        {
+            case "Camera 1":
+                x = cam.pixelWidth / 2f;
+                y = cam.pixelHeight / 2f + cam.pixelHeight;
+                break;
+
+            case "Camera 2":
+                x = cam.pixelWidth / 2f;
+                y = cam.pixelHeight / 2f;
+                break;
+
+            default:
+                x = Screen.width / 2;
+                y = Screen.height / 2;
+                break;
+        }
+    }
 	
 	void Update () {
 
         nextFire += Time.deltaTime;
 
+        //Escolhe o tipo de input dependendo do objeto pai (verifica se é o jogador 1 ou 2 a carregar e armazena essa info num boleano)
+        if (tag == "Player 2")
+            input = Input.GetButton("Fire1");
+        else
+            input = Input.GetKeyDown(KeyCode.Space);
+
+
         //TODO: dar tiro apenas quando as asas estão em modo ataque
-        if (Input.GetButton("Fire1") && fireRate < nextFire)
+        if (input && fireRate < nextFire)
         {            
             //É lançado um raio na direção do centro do ecrã, esta direção será depois usada para mover a bala no espaço
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(x, y, 0));
+            Ray ray = cam.ScreenPointToRay(new Vector3(x, y, 0));
 
             laserClone = (GameObject)Instantiate(laser, transform.position, transform.rotation);
 
             direction = (ray.GetPoint(100000.0f) - laserClone.transform.position).normalized; //direção normalizada
             laserClone.GetComponent<MoveBullet>().velocity = direction * 200; //a bala é movida através do seu rigidbody (ver classe MoveBullet)
 
-            //Debug.DrawLine(transform.position, ray.GetPoint(20), Color.red, 2, true);
+            Debug.DrawLine(transform.position, ray.GetPoint(20), Color.red, 2, true);
  
             shootSource.Play();
             nextFire = 0;

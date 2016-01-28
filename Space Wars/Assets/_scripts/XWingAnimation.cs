@@ -83,7 +83,7 @@ public class XWingAnimation : MonoBehaviour {
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && !animate)
+        if(Input.GetKeyDown(KeyCode.X) && !animate)
         {
             animate = true;
         }

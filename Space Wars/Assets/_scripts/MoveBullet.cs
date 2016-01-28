@@ -24,11 +24,6 @@ public class MoveBullet : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-
-        //else
-        //{
-        //    transform.position += transform.forward * Time.deltaTime * speed;
-        //}
 	}
 
     void OnCollisionEnter(Collision col)
