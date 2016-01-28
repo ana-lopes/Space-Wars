@@ -7,7 +7,7 @@ public class XWingAnimation : MonoBehaviour {
     //não é necessário nem importante mas são boas práticas de programação
 
     [SerializeField] private bool animate = false;
-    [SerializeField] private bool open = false;
+    [SerializeField] private static bool open = false;
 
     [SerializeField] private GameObject[] RightUpWing;
     [SerializeField] private GameObject[] RightDownWing;
@@ -95,7 +95,7 @@ public class XWingAnimation : MonoBehaviour {
         set { animate = value; }
     }
 
-    public bool isInAttackMode
+    public static bool isInAttackMode
     {
         get { return open; }
     }

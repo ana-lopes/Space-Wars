@@ -60,11 +60,9 @@ public class Shoot : MonoBehaviour {
         if (tag == "Player 2")
             input = Input.GetButton("Fire1");
         else
-            input = Input.GetKeyDown(KeyCode.Space);
+            if(XWingAnimation.isInAttackMode) input = Input.GetKeyDown(KeyCode.Space); //se as asas estiverem abertas dispara
 
-
-        //TODO: dar tiro apenas quando as asas estão em modo ataque
-        if (input && fireRate < nextFire)
+        if (!GameControl.pause && input && fireRate < nextFire)
         {            
             //É lançado um raio na direção do centro do ecrã, esta direção será depois usada para mover a bala no espaço
             Ray ray = cam.ScreenPointToRay(new Vector3(x, y, 0));
@@ -72,14 +70,14 @@ public class Shoot : MonoBehaviour {
             laserClone = (GameObject)Instantiate(laser, transform.position, transform.rotation);
 
             direction = (ray.GetPoint(100000.0f) - laserClone.transform.position).normalized; //direção normalizada
-            laserClone.GetComponent<MoveBullet>().velocity = direction * 200; //a bala é movida através do seu rigidbody (ver classe MoveBullet)
+            laserClone.GetComponent<MoveBullet>().velocity = direction * 250; //a bala é movida através do seu rigidbody (ver classe MoveBullet)
 
             Debug.DrawLine(transform.position, ray.GetPoint(20), Color.red, 2, true);
  
             shootSource.Play();
             nextFire = 0;
 
-            flash.intensity = 3.0f;
+            flash.intensity = 2.0f;
         }
 
         //"desliga" a luz depois do tiro dado. Math.Lerp cria uma interpolação entre os valores ao longo do tempo de modo a que a transição não seja tão brusca
