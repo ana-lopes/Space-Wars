@@ -49,6 +49,8 @@ public class MainMenu : MonoBehaviour {
     public void multiplayerMode()
     {
         PlayerPrefs.SetInt("mode", 2);
+
+        StartCoroutine(DisplayLoadingScreen(2));
     }
 
 

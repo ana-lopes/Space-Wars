@@ -17,6 +17,7 @@ public class GameControl : MonoBehaviour {
     void Start()
     {
         Cursor.visible = false;
+        AudioListener.pause = false;
     }
 
 	void Update () {

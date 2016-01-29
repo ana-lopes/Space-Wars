@@ -64,7 +64,58 @@ public class PlayerControl : MonoBehaviour {
 
         if(life <= 0)
         {
-           //dying code?
+            if (gameMode == 1)
+            {
+                HUD.GetComponent<CanvasGroup>().alpha = 0;
+                gameOverMenu.GetComponent<CanvasGroup>().alpha = 1;
+                gameOverMenu.GetComponent<CanvasGroup>().interactable = true;
+
+                Instantiate(explosion, transform.position, Quaternion.identity);
+                source.Play();
+
+                transform.FindChild("CameraRig").SetParent(canvas.transform);
+                GameObject.Find("infinite terrain").GetComponent<TerrainGenerator>().enabled = false;
+                Cursor.visible = true;
+                Destroy(gameObject);
+            }
+
+            else
+            {
+                if(tag == "Player 2")
+                {
+                    HUD2.GetComponent<CanvasGroup>().alpha = 0;
+                    gameOverMenu.GetComponent<CanvasGroup>().alpha = 1;
+                    gameOverMenu.GetComponent<CanvasGroup>().interactable = true;
+
+                    foreach (Transform t in gameOverMenu.transform)
+                        t.gameObject.SetActive(true);
+
+                    Instantiate(explosion, transform.position, Quaternion.identity);
+                    source.Play();
+                    Cursor.visible = true;
+
+                    transform.FindChild("Camera 2").SetParent(canvas.transform);
+                    Destroy(gameObject);
+                }
+
+                else
+                {
+                    HUD.GetComponent<CanvasGroup>().alpha = 0;
+                    gameOverMenu.GetComponent<CanvasGroup>().alpha = 1;
+                    gameOverMenu.GetComponent<CanvasGroup>().interactable = true;
+
+                    foreach (Transform t in gameOverMenu.transform)
+                        t.gameObject.SetActive(true);
+
+                    Instantiate(explosion, transform.position, Quaternion.identity);
+                    source.Play();
+                    Cursor.visible = true;
+
+                    //para não destruir a camara
+                    transform.FindChild("Camera 1").SetParent(canvas.transform);
+                    Destroy(gameObject);
+                }
+            }
         }
 	}
 
@@ -77,6 +128,7 @@ public class PlayerControl : MonoBehaviour {
             if (pause) onPause();
             if (!resumed && !pause) onResume();
         }
+
     }
 
     void OnCollisionEnter(Collision col)
@@ -86,19 +138,31 @@ public class PlayerControl : MonoBehaviour {
         {
             if (col.gameObject.CompareTag("enemy") || col.gameObject.CompareTag("ground"))
             {
-                StartCoroutine(Fade(HUD, -0.05f));
-                StartCoroutine(Fade(gameOverMenu, +0.05f));
+                HUD.GetComponent<CanvasGroup>().alpha = 0;
+                gameOverMenu.GetComponent<CanvasGroup>().alpha = 1;
                 gameOverMenu.GetComponent<CanvasGroup>().interactable = true;
 
                 Instantiate(explosion, transform.position, Quaternion.identity);
                 source.Play();
+
+                transform.FindChild("CameraRig").SetParent(canvas.transform);
+                GameObject.Find("infinite terrain").GetComponent<TerrainGenerator>().enabled = false;
+                Cursor.visible = true;
                 Destroy(gameObject);
             }
 
             else if (col.gameObject.CompareTag("enemy bullet") && life - 30 > 0)
             {
-                life -= 30;
-                canvas.transform.FindChild("HUD/life").GetComponent<Text>().text = life.ToString();
+                life -= 10;
+                canvas.transform.FindChild("HUD/life").localScale = new Vector3(life * 0.01f, 1, 1);
+
+                //muda a cor consoante a vida
+                if (life > 90)
+                    canvas.transform.FindChild("HUD/life").GetComponent<Image>().color = Color.green;
+                else if (life < 90 && life > 50)
+                    canvas.transform.FindChild("HUD/life").GetComponent<Image>().color = Color.yellow;
+                else if (life < 50)
+                    canvas.transform.FindChild("HUD/life").GetComponent<Image>().color = Color.red;
             }
         }
 
@@ -118,6 +182,7 @@ public class PlayerControl : MonoBehaviour {
 
                     Instantiate(explosion, transform.position, Quaternion.identity);
                     source.Play();
+                    Cursor.visible = true;
 
                     transform.FindChild("Camera 2").SetParent(canvas.transform);
                     Destroy(gameObject);
@@ -126,7 +191,14 @@ public class PlayerControl : MonoBehaviour {
                 else if (col.gameObject.CompareTag("player bullet") && life - 30 > 0)
                 {
                     life -= 30;
-                    canvas.transform.FindChild("HUD 2/life").GetComponent<Text>().text = life.ToString();
+                    canvas.transform.FindChild("HUD 2/life").localScale = new Vector3(life * 0.01f, 1, 1);
+
+                    if (life > 90)
+                        canvas.transform.FindChild("HUD/life").GetComponent<Image>().color = Color.green;
+                    else if (life < 90 && life > 50)
+                        canvas.transform.FindChild("HUD/life").GetComponent<Image>().color = Color.yellow;
+                    else if (life < 50)
+                        canvas.transform.FindChild("HUD/life").GetComponent<Image>().color = Color.red;
                 }
             }
 
@@ -143,6 +215,7 @@ public class PlayerControl : MonoBehaviour {
 
                     Instantiate(explosion, transform.position, Quaternion.identity);
                     source.Play();
+                    Cursor.visible = true;
 
                     //para não destruir a camara
                     transform.FindChild("Camera 1").SetParent(canvas.transform);
@@ -152,7 +225,14 @@ public class PlayerControl : MonoBehaviour {
                 else if (col.gameObject.CompareTag("enemy bullet") && life - 30 > 0)
                 {
                     life -= 30;
-                    canvas.transform.FindChild("HUD 1/life").GetComponent<Text>().text = life.ToString();
+                    canvas.transform.FindChild("HUD/life").localScale = new Vector3(life * 0.01f, 1, 1);
+
+                    if (life > 90)
+                canvas.transform.FindChild("HUD/life").GetComponent<Image>().color = Color.green;
+            else if (life < 90 && life > 50)
+                canvas.transform.FindChild("HUD/life").GetComponent<Image>().color = Color.yellow;
+            else if (life < 50)
+                canvas.transform.FindChild("HUD/life").GetComponent<Image>().color = Color.red;
                 }
             }
         }

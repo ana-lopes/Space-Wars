@@ -26,20 +26,22 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
         {
             // Read input for the pitch, yaw, roll and throttle of the aeroplane.
             float roll = 0, pitch = 0;
+            bool airBrakes = false;
 
             if (tag == "Player")
             {
                 roll = Input.GetAxis("Horizontal P1");
                 pitch = Input.GetAxis("Vertical P1");
+                airBrakes = Input.GetKey(KeyCode.B);
             }
 
             else if(tag == "Player 2")
             {
                 roll = Input.GetAxis("Horizontal P2");
                 pitch = Input.GetAxis("Vertical P2");
+                airBrakes = Input.GetButton("Fire2");
+
             }
-            
-            bool airBrakes = Input.GetButton("Fire1");
 
             // auto throttle up, or down if braking.
             float throttle = airBrakes ? -1 : 1;

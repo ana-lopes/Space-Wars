@@ -69,6 +69,8 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
             // Start the sounds playing.
             m_EngineSoundSource.Play();
             m_WindSoundSource.Play();
+
+            m_EngineSoundSource.volume = 0.5f;
         }
 
 
@@ -85,9 +87,9 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
             m_EngineSoundSource.pitch += m_Plane.ForwardSpeed*m_EngineFwdSpeedMultiplier;
 
             // Set the engine's volume to be proportional to the engine's current power.
-            m_EngineSoundSource.volume = Mathf.InverseLerp(0, m_Plane.MaxEnginePower*m_AdvancedSetttings.engineMasterVolume,
-                                                         m_Plane.EnginePower);
-
+            //m_EngineSoundSource.volume = Mathf.InverseLerp(0, m_Plane.MaxEnginePower*m_AdvancedSetttings.engineMasterVolume,
+            //                                             m_Plane.EnginePower);
+            
             // Set the wind's pitch and volume to be proportional to the aeroplane's forward speed.
             float planeSpeed = m_Rigidbody.velocity.magnitude;
             m_WindSoundSource.pitch = m_WindBasePitch + planeSpeed*m_WindSpeedPitchFactor;
