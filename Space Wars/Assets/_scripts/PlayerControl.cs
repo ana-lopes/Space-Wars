@@ -157,6 +157,7 @@ public class PlayerControl : MonoBehaviour {
                 source.Play();
 
                 transform.FindChild("CameraRig").SetParent(canvas.transform);
+
                 GameObject.Find("infinite terrain").GetComponent<TerrainGenerator>().enabled = false;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
