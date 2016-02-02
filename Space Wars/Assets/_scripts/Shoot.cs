@@ -79,7 +79,6 @@ public class Shoot : MonoBehaviour {
             }
 
             //Debug.DrawLine(transform.position, ray.GetPoint(100), Color.red, 2, true);
- 
         }
 
         //"desliga" a luz depois do tiro dado. Math.Lerp cria uma interpolação entre os valores ao longo do tempo de modo a que a transição não seja tão brusca

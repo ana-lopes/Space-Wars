@@ -334,11 +334,11 @@ public class PlayerControl : MonoBehaviour {
         resumed = true;
 
         if (gameMode == 1)
-            StartCoroutine(gamecontrol.Fade(pauseMenu, +0.05f));
+            StartCoroutine(gamecontrol.Fade(HUD, +0.05f));
         else
         {
-            StartCoroutine(gamecontrol.Fade(pauseMenu, +0.05f));
-            StartCoroutine(gamecontrol.Fade(pauseMenu, +0.05f));
+            StartCoroutine(gamecontrol.Fade(HUD, +0.05f));
+            StartCoroutine(gamecontrol.Fade(HUD, +0.05f));
         }
     }
 
