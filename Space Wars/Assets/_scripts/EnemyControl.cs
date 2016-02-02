@@ -21,6 +21,8 @@ public class EnemyControl : MonoBehaviour {
     {
         if (col.gameObject.CompareTag("player bullet"))
         {
+            Debug.Log("boop");
+
             Instantiate(explosion, transform.position, Quaternion.identity);
 
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
@@ -30,6 +32,8 @@ public class EnemyControl : MonoBehaviour {
 
             if (enemies.Length - 1 == 0)
                 GameControl.win = true;
+
+            RadarControl.changed = true;
 
             Destroy(gameObject);
         }

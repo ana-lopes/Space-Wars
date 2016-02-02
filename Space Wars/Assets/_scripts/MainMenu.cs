@@ -22,14 +22,17 @@ public class MainMenu : MonoBehaviour {
 	}
 	
 	void Update () {
-
+        transform.Rotate(new Vector3(0, 1, 0), 0.02f);
 	}
 
     public void newGame()
     {
         //coroutines são tipo métodos update, estão sempre a correr até os mandares parar e é basicamente isso que está a acontecer
         StartCoroutine(Fade(mainMenuGroup, -0.05f));
+        mainMenuGroup.GetComponent<CanvasGroup>().interactable = false;
+
         StartCoroutine(Fade(gameModeGroup, +0.05f));
+        gameModeGroup.GetComponent<CanvasGroup>().interactable = true;
     }
 
     public void exit()

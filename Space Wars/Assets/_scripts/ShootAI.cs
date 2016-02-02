@@ -37,10 +37,10 @@ public class ShootAI : MonoBehaviour {
         if (fireRate < nextFire && target != null)
         {
             laserClone1 = (GameObject) Instantiate(laser, transform.position, transform.rotation);
-            laserClone1.GetComponent<MoveBullet>().velocity = - Vector3.forward * 200;
+            laserClone1.GetComponent<MoveBullet>().velocity = Vector3.forward * 200;
 
             laserClone2 = (GameObject)Instantiate(laser, otherCannon.position, otherCannon.rotation);
-            laserClone2.GetComponent<MoveBullet>().velocity = -Vector3.forward * 200;
+            laserClone2.GetComponent<MoveBullet>().velocity = Vector3.forward * 200;
 
             shoot.Play();
             nextFire = 0;
@@ -52,6 +52,7 @@ public class ShootAI : MonoBehaviour {
         }
 
         nextFire += Time.deltaTime;
+
         if (flash1.intensity > 0)
         {
             flash1.intensity = Mathf.Lerp(flash1.intensity, 0, Time.deltaTime * 2f);
