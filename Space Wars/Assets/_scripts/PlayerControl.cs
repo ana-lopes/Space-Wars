@@ -14,6 +14,7 @@ public class PlayerControl : MonoBehaviour {
 
     private Canvas canvas;
     private AudioSource source;
+    private GameControl gamecontrol;
 
     private bool pause = false;
     private bool resumed = false;
@@ -21,7 +22,7 @@ public class PlayerControl : MonoBehaviour {
     public int life = 100;
 
     private int gameMode;
-    private GameObject HUD, HUD2, pauseMenu, gameOverMenu;
+    private GameObject HUD, HUD2, pauseMenu, gameOverMenu, gameWinMenu;
 
     public bool debug = false;
     public int level;
@@ -38,6 +39,9 @@ public class PlayerControl : MonoBehaviour {
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         pauseMenu = canvas.transform.FindChild("pause").gameObject;
         gameOverMenu = canvas.transform.FindChild("game over").gameObject;
+        gameWinMenu = canvas.transform.FindChild("game win").gameObject;
+
+        gamecontrol = GameObject.Find("GameController").GetComponent<GameControl>();
 
         //Cria um audiosource para reproduzir o som da explosão quando a nave explode
         source = gameObject.AddComponent<AudioSource>();
@@ -67,8 +71,9 @@ public class PlayerControl : MonoBehaviour {
             if (gameMode == 1)
             {
                 HUD.GetComponent<CanvasGroup>().alpha = 0;
-                gameOverMenu.GetComponent<CanvasGroup>().alpha = 1;
-                gameOverMenu.GetComponent<CanvasGroup>().interactable = true;
+
+                foreach (Transform t in gameOverMenu.transform)
+                    t.gameObject.SetActive(true);
 
                 Instantiate(explosion, transform.position, Quaternion.identity);
                 source.Play();
@@ -76,23 +81,28 @@ public class PlayerControl : MonoBehaviour {
                 transform.FindChild("CameraRig").SetParent(canvas.transform);
                 GameObject.Find("infinite terrain").GetComponent<TerrainGenerator>().enabled = false;
                 Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+
                 Destroy(gameObject);
             }
 
             else
             {
+                GameControl.lose = true;
+
                 if(tag == "Player 2")
                 {
                     HUD2.GetComponent<CanvasGroup>().alpha = 0;
-                    gameOverMenu.GetComponent<CanvasGroup>().alpha = 1;
-                    gameOverMenu.GetComponent<CanvasGroup>().interactable = true;
 
-                    foreach (Transform t in gameOverMenu.transform)
-                        t.gameObject.SetActive(true);
+                    //foreach (Transform t in gameOverMenu.transform)
+                    //    t.gameObject.SetActive(true);
 
                     Instantiate(explosion, transform.position, Quaternion.identity);
                     source.Play();
                     Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
+
+                    gamecontrol.MultiplayerWin("1", HUD, HUD2);
 
                     transform.FindChild("Camera 2").SetParent(canvas.transform);
                     Destroy(gameObject);
@@ -101,15 +111,16 @@ public class PlayerControl : MonoBehaviour {
                 else
                 {
                     HUD.GetComponent<CanvasGroup>().alpha = 0;
-                    gameOverMenu.GetComponent<CanvasGroup>().alpha = 1;
-                    gameOverMenu.GetComponent<CanvasGroup>().interactable = true;
 
-                    foreach (Transform t in gameOverMenu.transform)
-                        t.gameObject.SetActive(true);
+                    //foreach (Transform t in gameOverMenu.transform)
+                    //    t.gameObject.SetActive(true);
 
                     Instantiate(explosion, transform.position, Quaternion.identity);
                     source.Play();
                     Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
+
+                    gamecontrol.MultiplayerWin("2", HUD, HUD2);
 
                     //para não destruir a camara
                     transform.FindChild("Camera 1").SetParent(canvas.transform);
@@ -121,10 +132,9 @@ public class PlayerControl : MonoBehaviour {
 
     void GetInput()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && GameControl.win == false && GameControl.lose == false)
         {
             pause = !pause;
-            GameControl.pause = pause;
             if (pause) onPause();
             if (!resumed && !pause) onResume();
         }
@@ -136,11 +146,12 @@ public class PlayerControl : MonoBehaviour {
         //se for single mode
         if (gameMode == 1)
         {
-            if (col.gameObject.CompareTag("enemy") || col.gameObject.CompareTag("ground"))
+            if (col.gameObject.CompareTag("enemy") || col.gameObject.CompareTag("ground") || col.gameObject.CompareTag("star destroyer"))
             {
                 HUD.GetComponent<CanvasGroup>().alpha = 0;
-                gameOverMenu.GetComponent<CanvasGroup>().alpha = 1;
-                gameOverMenu.GetComponent<CanvasGroup>().interactable = true;
+
+                foreach (Transform t in gameOverMenu.transform)
+                    t.gameObject.SetActive(true);
 
                 Instantiate(explosion, transform.position, Quaternion.identity);
                 source.Play();
@@ -148,21 +159,30 @@ public class PlayerControl : MonoBehaviour {
                 transform.FindChild("CameraRig").SetParent(canvas.transform);
                 GameObject.Find("infinite terrain").GetComponent<TerrainGenerator>().enabled = false;
                 Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+
                 Destroy(gameObject);
             }
 
-            else if (col.gameObject.CompareTag("enemy bullet") && life - 30 > 0)
+            else if (col.gameObject.CompareTag("enemy bullet"))
             {
-                life -= 10;
-                canvas.transform.FindChild("HUD/life").localScale = new Vector3(life * 0.01f, 1, 1);
+                Debug.Log("boop");
 
-                //muda a cor consoante a vida
-                if (life > 90)
-                    canvas.transform.FindChild("HUD/life").GetComponent<Image>().color = Color.green;
-                else if (life < 90 && life > 50)
-                    canvas.transform.FindChild("HUD/life").GetComponent<Image>().color = Color.yellow;
-                else if (life < 50)
-                    canvas.transform.FindChild("HUD/life").GetComponent<Image>().color = Color.red;
+                life -= 10;
+                Destroy(col.gameObject);
+
+                if (life > 0)
+                {
+                    canvas.transform.FindChild("HUD/life").localScale = new Vector3(life * 0.01f, 1, 1);
+
+                    //muda a cor consoante a vida
+                    if (life > 90)
+                        canvas.transform.FindChild("HUD/life").GetComponent<Image>().color = Color.green;
+                    else if (life < 90 && life > 50)
+                        canvas.transform.FindChild("HUD/life").GetComponent<Image>().color = Color.yellow;
+                    else if (life < 50)
+                        canvas.transform.FindChild("HUD/life").GetComponent<Image>().color = Color.red;
+                }
             }
         }
 
@@ -174,8 +194,6 @@ public class PlayerControl : MonoBehaviour {
                 if (col.gameObject.CompareTag("Player"))
                 {
                     HUD2.GetComponent<CanvasGroup>().alpha = 0;
-                    gameOverMenu.GetComponent<CanvasGroup>().alpha = 1;
-                    gameOverMenu.GetComponent<CanvasGroup>().interactable = true;
 
                     foreach (Transform t in gameOverMenu.transform)
                         t.gameObject.SetActive(true);
@@ -188,17 +206,39 @@ public class PlayerControl : MonoBehaviour {
                     Destroy(gameObject);
                 }
 
-                else if (col.gameObject.CompareTag("player bullet") && life - 30 > 0)
+                else if (col.gameObject.CompareTag("star destroyer"))
                 {
-                    life -= 30;
-                    canvas.transform.FindChild("HUD 2/life").localScale = new Vector3(life * 0.01f, 1, 1);
+                    HUD2.GetComponent<CanvasGroup>().alpha = 0;
 
-                    if (life > 90)
-                        canvas.transform.FindChild("HUD/life").GetComponent<Image>().color = Color.green;
-                    else if (life < 90 && life > 50)
-                        canvas.transform.FindChild("HUD/life").GetComponent<Image>().color = Color.yellow;
-                    else if (life < 50)
-                        canvas.transform.FindChild("HUD/life").GetComponent<Image>().color = Color.red;
+                    foreach (Transform t in gameOverMenu.transform)
+                        t.gameObject.SetActive(true);
+
+                    gameOverMenu.transform.FindChild("gameover text").GetComponent<Text>().text = "Player 1 wins!";
+
+                    Instantiate(explosion, transform.position, Quaternion.identity);
+                    source.Play();
+                    Cursor.visible = true;
+
+                    transform.FindChild("Camera 2").SetParent(canvas.transform);
+                    Destroy(gameObject);
+                }
+
+                else if (col.gameObject.CompareTag("player bullet"))
+                {
+                    life -= 10;
+                    Destroy(col.gameObject);
+
+                    if (life > 0)
+                    {
+                        canvas.transform.FindChild("HUD P2/life").localScale = new Vector3(life * 0.01f, 1, 1);
+
+                        if (life > 90)
+                            canvas.transform.FindChild("HUD P2/life").GetComponent<Image>().color = Color.green;
+                        else if (life < 90 && life > 50)
+                            canvas.transform.FindChild("HUD P2/life").GetComponent<Image>().color = Color.yellow;
+                        else if (life < 50)
+                            canvas.transform.FindChild("HUD P2/life").GetComponent<Image>().color = Color.red;
+                    }
                 }
             }
 
@@ -207,8 +247,6 @@ public class PlayerControl : MonoBehaviour {
                 if (col.gameObject.CompareTag("Player 2"))
                 {
                     HUD.GetComponent<CanvasGroup>().alpha = 0;
-                    gameOverMenu.GetComponent<CanvasGroup>().alpha = 1;
-                    gameOverMenu.GetComponent<CanvasGroup>().interactable = true;
                     
                     foreach (Transform t in gameOverMenu.transform)
                         t.gameObject.SetActive(true);
@@ -222,17 +260,39 @@ public class PlayerControl : MonoBehaviour {
                     Destroy(gameObject);
                 }
 
-                else if (col.gameObject.CompareTag("enemy bullet") && life - 30 > 0)
+                else if (col.gameObject.CompareTag("star destroyer"))
                 {
-                    life -= 30;
-                    canvas.transform.FindChild("HUD/life").localScale = new Vector3(life * 0.01f, 1, 1);
+                    HUD2.GetComponent<CanvasGroup>().alpha = 0;
 
-                    if (life > 90)
-                canvas.transform.FindChild("HUD/life").GetComponent<Image>().color = Color.green;
-            else if (life < 90 && life > 50)
-                canvas.transform.FindChild("HUD/life").GetComponent<Image>().color = Color.yellow;
-            else if (life < 50)
-                canvas.transform.FindChild("HUD/life").GetComponent<Image>().color = Color.red;
+                    foreach (Transform t in gameOverMenu.transform)
+                        t.gameObject.SetActive(true);
+
+                    gameOverMenu.transform.FindChild("gameover text").GetComponent<Text>().text = "Player 2 wins!";
+
+                    Instantiate(explosion, transform.position, Quaternion.identity);
+                    source.Play();
+                    Cursor.visible = true;
+
+                    transform.FindChild("Camera 1").SetParent(canvas.transform);
+                    Destroy(gameObject);
+                }
+
+                else if (col.gameObject.CompareTag("enemy bullet"))
+                {
+                    life -= 10;
+                    Destroy(col.gameObject);
+
+                    if (life > 0)
+                    {
+                        canvas.transform.FindChild("HUD P1/life").localScale = new Vector3(life * 0.01f, 1, 1);
+
+                        if (life > 90)
+                            canvas.transform.FindChild("HUD P1/life").GetComponent<Image>().color = Color.green;
+                        else if (life < 90 && life > 50)
+                            canvas.transform.FindChild("HUD P1/life").GetComponent<Image>().color = Color.yellow;
+                        else if (life < 50)
+                            canvas.transform.FindChild("HUD P1/life").GetComponent<Image>().color = Color.red;
+                    }
                 }
             }
         }
@@ -241,8 +301,9 @@ public class PlayerControl : MonoBehaviour {
     public void onPause()
     {
         Cursor.visible = true;
-
-        StartCoroutine(Fade(pauseMenu, 0.05f));
+        Cursor.lockState = CursorLockMode.None;
+        
+        StartCoroutine(gamecontrol.Fade(pauseMenu, 0.05f));
         pauseMenu.GetComponent<CanvasGroup>().interactable = true;
 
         Time.timeScale = 0;        
@@ -250,11 +311,11 @@ public class PlayerControl : MonoBehaviour {
         resumed = false;
 
         if (gameMode == 1)
-            StartCoroutine(Fade(HUD, -0.05f));
+            StartCoroutine(gamecontrol.Fade(HUD, -0.05f));
         else
         {
-            StartCoroutine(Fade(HUD, -0.05f));
-            StartCoroutine(Fade(HUD2, -0.05f));
+            StartCoroutine(gamecontrol.Fade(HUD, -0.05f));
+            StartCoroutine(gamecontrol.Fade(HUD, -0.05f));
         }
     }
 
@@ -263,8 +324,9 @@ public class PlayerControl : MonoBehaviour {
     public void onResume()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
 
-        StartCoroutine(Fade(pauseMenu, -0.05f));
+        StartCoroutine(gamecontrol.Fade(pauseMenu, -0.05f));
         canvas.transform.FindChild("pause").GetComponent<CanvasGroup>().interactable = false;
 
         Time.timeScale = 1;
@@ -272,70 +334,17 @@ public class PlayerControl : MonoBehaviour {
         resumed = true;
 
         if (gameMode == 1)
-            StartCoroutine(Fade(HUD, +0.05f));
+            StartCoroutine(gamecontrol.Fade(pauseMenu, +0.05f));
         else
         {
-            StartCoroutine(Fade(HUD, +0.05f));
-            StartCoroutine(Fade(HUD2, +0.05f));
+            StartCoroutine(gamecontrol.Fade(pauseMenu, +0.05f));
+            StartCoroutine(gamecontrol.Fade(pauseMenu, +0.05f));
         }
     }
 
     public void exitMain()
     {
         //vai para o menu inicial (cena 0)
-        StartCoroutine(DisplayLoadingScreen(0));
+        StartCoroutine(gamecontrol.DisplayLoadingScreen(0));
     }
-
-    #region coroutines n shit
-
-    IEnumerator Fade(GameObject group, float incrementation)
-    {
-        bool fade = true;
-
-        foreach (Transform t in group.transform)
-        {
-            if (incrementation > 0)
-                t.gameObject.SetActive(true);
-            else
-                t.gameObject.SetActive(false);
-        }
-
-        while (fade)
-        {
-            group.GetComponent<CanvasGroup>().alpha += incrementation;
-
-            if (group.GetComponent<CanvasGroup>().alpha <= 0 || group.GetComponent<CanvasGroup>().alpha >= 1)
-            {
-                fade = false;
-            }
-
-            yield return null;
-        }
-    }
-
-    //para ter um loading screen em vez de aparecer tudo preto quando carrega, again coroutine
-    IEnumerator DisplayLoadingScreen(int level)
-    {
-        loadBackground.SetActive(true);
-        loadText.SetActive(true);
-        //loadImage.SetActive(true);
-
-        loadText.GetComponent<Text>().text = loadProgress + "%";
-
-        AsyncOperation async = SceneManager.LoadSceneAsync(level);
-
-        while (!async.isDone)
-        {
-            loadProgress = (int)(async.progress * 100);
-            loadText.GetComponent<Text>().text = "Loading... " + loadProgress + "%";
-
-            yield return null;
-        }
-
-        loadBackground.SetActive(false);
-        loadText.SetActive(false);
-        //loadImage.SetActive(false);
-        loadProgress = 0;
-    }
-    #endregion
 }

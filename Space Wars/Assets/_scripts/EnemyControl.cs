@@ -16,16 +16,27 @@ public class EnemyControl : MonoBehaviour {
         source.playOnAwake = false;
         source.clip = clip;
 	}
-	
-    public void OnColliderEnter(Collider col)
+
+    void OnCollisionEnter(Collision col)
     {
-        if(col.gameObject.CompareTag("player bullet"))
+        if (col.gameObject.CompareTag("player bullet"))
         {
             Instantiate(explosion, transform.position, Quaternion.identity);
 
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
-            canvas.transform.FindChild("HUD/tie fighter").GetComponent<Text>().text = "Tie Fighters: " + enemies.Length;
+            canvas.transform.FindChild("HUD/enemies").GetComponent<Text>().text = "Enemies left\n " + (enemies.Length - 1);
 
+            source.Play();
+
+            if (enemies.Length - 1 == 0)
+                GameControl.win = true;
+
+            Destroy(gameObject);
+        }
+
+        else if (col.gameObject.CompareTag("Player"))
+        {
+            Instantiate(explosion, transform.position, Quaternion.identity);
             source.Play();
 
             Destroy(gameObject);
