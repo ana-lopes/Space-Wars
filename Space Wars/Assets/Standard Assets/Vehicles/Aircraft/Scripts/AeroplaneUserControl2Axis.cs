@@ -14,7 +14,6 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
         // reference to the aeroplane that we're controlling
         private AeroplaneController m_Aeroplane;
 
-
         private void Awake()
         {
             // Set up the reference to the aeroplane controller.
@@ -40,7 +39,6 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
                 roll = Input.GetAxis("Horizontal P2");
                 pitch = Input.GetAxis("Vertical P2");
                 airBrakes = Input.GetButton("Fire2");
-
             }
 
             // auto throttle up, or down if braking.

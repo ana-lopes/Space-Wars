@@ -25,12 +25,4 @@ public class MoveBullet : MonoBehaviour {
             Destroy(gameObject);
         }
 	}
-
-    void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.CompareTag("ground"))
-        {
-            Destroy(gameObject);
-        }
-    }
 }

@@ -70,7 +70,7 @@ namespace UnityStandardAssets.Vehicles.Aeroplane
             m_EngineSoundSource.Play();
             m_WindSoundSource.Play();
 
-            m_EngineSoundSource.volume = 0.5f;
+            m_EngineSoundSource.volume = 0.25f;
         }
 
 

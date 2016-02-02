@@ -5,6 +5,7 @@ public class Shoot : MonoBehaviour {
 
     //SerializeField faz com que os objetos apareçam no inspector sem ser necessário a variável ser publica
     [SerializeField] private GameObject laser;
+    [SerializeField] private GameObject[] canons;
 
     [SerializeField] private float nextFire = 0;
     [SerializeField] private float fireRate = 0.5f;
@@ -22,9 +23,8 @@ public class Shoot : MonoBehaviour {
 
     void Awake()
     {
-        shootSource = GetComponent<AudioSource>();
-        flash = GetComponent<Light>();
-        flash.intensity = 0;
+        foreach(GameObject g in canons)
+            g.GetComponent<Light>().intensity = 0;
     }
 
     void Start()
@@ -62,26 +62,29 @@ public class Shoot : MonoBehaviour {
         else
             if(XWingAnimation.isInAttackMode) input = Input.GetKeyDown(KeyCode.Space); //se as asas estiverem abertas dispara
 
-        if (!GameControl.pause && input && fireRate < nextFire)
+        if (Time.timeScale != 0 && input && fireRate < nextFire)
         {            
             //É lançado um raio na direção do centro do ecrã, esta direção será depois usada para mover a bala no espaço
             Ray ray = cam.ScreenPointToRay(new Vector3(x, y, 0));
+            
+            foreach (GameObject g in canons)
+            {
+                laserClone = (GameObject)Instantiate(laser, g.transform.position, g.transform.rotation);
+                direction = (ray.GetPoint(100) + laserClone.transform.position).normalized;
+                laserClone.GetComponent<MoveBullet>().velocity = direction * 200;
 
-            laserClone = (GameObject)Instantiate(laser, transform.position, transform.rotation);
+                g.GetComponent<AudioSource>().Play();
 
-            direction = (ray.GetPoint(100000.0f) - laserClone.transform.position).normalized; //direção normalizada
-            laserClone.GetComponent<MoveBullet>().velocity = direction * 250; //a bala é movida através do seu rigidbody (ver classe MoveBullet)
+                g.GetComponent<Light>().intensity = 2.0f;
+            }
 
-            Debug.DrawLine(transform.position, ray.GetPoint(20), Color.red, 2, true);
+            //Debug.DrawLine(transform.position, ray.GetPoint(100), Color.red, 2, true);
  
-            shootSource.Play();
-            nextFire = 0;
-
-            flash.intensity = 2.0f;
         }
 
         //"desliga" a luz depois do tiro dado. Math.Lerp cria uma interpolação entre os valores ao longo do tempo de modo a que a transição não seja tão brusca
-        if(flash.intensity > 0)
-            flash.intensity = Mathf.Lerp(flash.intensity, 0, Time.deltaTime*2);
+        if (GetComponent<Light>().intensity > 0)
+            foreach (GameObject g in canons)
+                g.GetComponent<Light>().intensity = Mathf.Lerp(g.GetComponent<Light>().intensity, 0, Time.deltaTime*2);
     }
 }
