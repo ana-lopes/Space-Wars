@@ -53,6 +53,7 @@
      <Compile Include="Assets\_scripts\MainMenu.cs" />
      <Compile Include="Assets\_scripts\MoveBullet.cs" />
      <Compile Include="Assets\_scripts\PlayerControl.cs" />
+     <Compile Include="Assets\_scripts\RadarControl.cs" />
      <Compile Include="Assets\_scripts\Reset.cs" />
      <Compile Include="Assets\_scripts\Shoot.cs" />
      <Compile Include="Assets\_scripts\ShootAI.cs" />

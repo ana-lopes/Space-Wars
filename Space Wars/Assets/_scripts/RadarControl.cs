@@ -8,20 +8,20 @@ public class RadarControl : MonoBehaviour {
     public GameObject spherePrefab;
     private GameObject[] trackedObjects;
     private List<GameObject> borderObjects;
-    private string tagged, radar;
+    private string tagged, radar, invisible, rlyInvisible;
 
     public Transform helpTransform;
 
     public float switchDistance;
     private bool switchObjects = false;
 
-    public Transform player;
+    public GameObject player;
     
 	void Start () {
-       
-        trackedObjects = GameObject.FindGameObjectsWithTag("enemy");
-
         GetPlayMode();
+
+        trackedObjects = GameObject.FindGameObjectsWithTag(tagged);
+
         CreateRadarObjects();
 	}
 	
@@ -29,7 +29,6 @@ public class RadarControl : MonoBehaviour {
 	void Update () {
         if(changed)
         {
-            Debug.Log("hel ye");
             UpdateObjects();
 
             foreach (GameObject g in borderObjects)
@@ -52,7 +51,7 @@ public class RadarControl : MonoBehaviour {
                 borderObjects[i].transform.position = new Vector3(borderObjects[i].transform.position.x, helpTransform.position.y, borderObjects[i].transform.position.z);
 
                 borderObjects[i].layer = LayerMask.NameToLayer(radar);
-                trackedObjects[i].transform.FindChild("Sphere").gameObject.layer = LayerMask.NameToLayer("Invisible");
+                trackedObjects[i].transform.FindChild("Sphere").gameObject.layer = LayerMask.NameToLayer(invisible);
 
                 switchObjects = false;
             }
@@ -61,8 +60,8 @@ public class RadarControl : MonoBehaviour {
                 if (!switchObjects)
                 {
                     //switch back to radar objects
-                    borderObjects[i].layer = LayerMask.NameToLayer("Invisible");
-                    trackedObjects[i].transform.FindChild("Sphere").gameObject.layer = LayerMask.NameToLayer(radar);
+                    borderObjects[i].layer = LayerMask.NameToLayer(rlyInvisible);
+                    trackedObjects[i].transform.FindChild("Sphere").gameObject.layer = LayerMask.NameToLayer("Radar");
                     switchObjects = true;
                 }
             }
@@ -72,7 +71,7 @@ public class RadarControl : MonoBehaviour {
     void FixedUpdate()
     {
         if(player!= null)
-            transform.position = new Vector3(player.position.x, player.position.y + 500, player.position.z);
+            transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 500, player.transform.position.z);
     }
 
     private void UpdateObjects()
@@ -88,7 +87,7 @@ public class RadarControl : MonoBehaviour {
         foreach(GameObject g in trackedObjects)
         {
             aux = Instantiate(spherePrefab, g.transform.position, Quaternion.identity) as GameObject;
-            aux.layer = LayerMask.NameToLayer("Invisible");
+            aux.layer = LayerMask.NameToLayer(invisible);
             aux.transform.parent = transform;
             borderObjects.Add(aux);
         }
@@ -96,23 +95,28 @@ public class RadarControl : MonoBehaviour {
 
     private void GetPlayMode()
     {
-
         if (PlayerPrefs.GetInt("mode") == 1)
         {
             tagged = "enemy";
             radar = "Radar";
+            invisible = "Invisible";
+            rlyInvisible = invisible;
         }
 
-        else if (PlayerPrefs.GetInt("mode") == 2 && tag == "Player")
+        else if (PlayerPrefs.GetInt("mode") == 2 && player.tag == "Player")
         {
             tagged = "Player 2";
-            radar = "Radar 1";
+            radar = "Radar";
+            invisible = "Invisible";
+            rlyInvisible = "Hella Invisible";
         }
 
-        else if (PlayerPrefs.GetInt("mode") == 2 && tag == "Player 2")
+        else if (PlayerPrefs.GetInt("mode") == 2 && player.tag == "Player 2")
         {
             tagged = "Player";
             radar = "Radar 2";
+            invisible = "Invisible 2";
+            rlyInvisible = "Hella Invisible";
         }
     }
 }
